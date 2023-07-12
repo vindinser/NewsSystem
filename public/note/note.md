@@ -3,6 +3,8 @@
 - [NewsSystem](#NewsSystem)
   - [创建项目](#创建项目)
   - [路由](#路由)
+  - [引入antd](#引入antd)
+  - [](#)
 
 
 # NewsSystem
@@ -43,3 +45,18 @@
 
   - 创建 文件： src/route/index.js
   - import {HashRouter, Route} from "react-router-dom";
+
+## 引入antd
+  `antd` 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。
+
+### 安装antd
+  
+  ``` powershell
+    npm install antd --save
+  ```
+
+  > 如果是antd5，不许要引入样式
+
+### 基本布局
+
+  *使用antd的Layout进行基本页面布局（导航栏、侧边栏、主体）*

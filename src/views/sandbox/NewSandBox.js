@@ -1,4 +1,4 @@
-// 沙箱
+// 沙箱组件
 import React from "react";
 import {Redirect, Route, Switch} from "react-router-dom";
 import SideMenu from "../../components/sandbox/SideMenu";
@@ -9,23 +9,41 @@ import RoleList from "./right-manage/RoleList";
 import RightList from "./right-manage/RightList";
 import NoPermission from "./nopermission/NoPermission";
 
+import { Layout, theme } from 'antd';
+const { Content } = Layout;
+
 const NewSandBox = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
   return (
-    <div>
+    <Layout style={{ minHeight: '100vh' }}>
       <SideMenu />
-      <TopHeader />
+      <Layout>
+        <TopHeader />
 
-      <Switch>
-        <Route path="/home" component={Home} />
-        <Route path="/user-manage/list" component={UserList} />
-        <Route path="/right-manage/role/list" component={RoleList} />
-        <Route path="/right-manage/right/list" component={RightList} />
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            minHeight: 280,
+            background: colorBgContainer,
+          }}
+        >
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/user-manage/list" component={UserList} />
+            <Route path="/right-manage/role/list" component={RoleList} />
+            <Route path="/right-manage/right/list" component={RightList} />
 
-        {/* 重定向 */}
-        <Redirect from="/" to="/home" exact />
-        <Route path="*" component={NoPermission} />
-      </Switch>
-    </div>
+            {/* 重定向 */}
+            <Redirect from="/" to="/home" exact />
+            <Route path="*" component={NoPermission} />
+          </Switch>
+        </Content>
+      </Layout>
+    </Layout>
   )
 }
 
