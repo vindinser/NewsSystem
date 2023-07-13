@@ -4,7 +4,7 @@
   - [创建项目](#创建项目)
   - [路由](#路由)
   - [引入antd](#引入antd)
-  - [](#)
+  - [JsonServer](#JsonServer)
 
 
 # NewsSystem
@@ -60,3 +60,54 @@
 ### 基本布局
 
   *使用antd的Layout进行基本页面布局（导航栏、侧边栏、主体）*
+
+## [JsonServer](https://www.npmjs.com/package/json-server)
+  > 在不到30秒的时间内获得零编码的完全假冒REST API;用<3为需要快速后端进行原型设计和模拟的前端开发人员创建。
+
+  - 安装json-server
+    ``` powershell
+      npm install -g json-server
+    ```
+  - 创建一个 `db.json` 文件
+    ``` json
+      {
+        "posts": [
+          { "id": 1, "title": "json-server", "author": "typicode" }
+        ],
+        "comments": [
+          { "id": 1, "body": "some comment", "postId": 1 }
+        ],
+        "profile": { "name": "typicode" }
+      }
+    ```
+  - 启动 json-server
+    ``` js
+      json-server --watch db.json --port 5000 // 启动 json-server 于5000端口
+    ```
+  - 访问 `http://localhost:3000/posts/1`
+  - curd
+    ``` javascript
+      get     // 查
+      post    // 增
+      put     // 改
+      patch   // 更新
+      delete  // 删
+      _embed  // 联合集合查询
+      _expand // 向上查询（可返回子集的父级）
+    ```
+    
+### 模拟后端服务
+
+  - 封装axios方法
+  - 接口统一管理
+  - 动态渲染侧边栏
+
+  *动态获取侧边栏后改变选中侧边栏，URL改变页面不刷新，经查阅是阉割模式的问题*
+    ```javascript
+      // index.js中的原写法
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+      // 取消严格模式
+      <App />
+    ```
