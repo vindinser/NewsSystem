@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const baseUrl = 'http://localhost:5000/';
 
-const request = (url, data = {}, method = 'get') => {
+const request = (url, method = 'get', data = {}) => {
   return new Promise((resolve, reject) => {
     axios({
       method,

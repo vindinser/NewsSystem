@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from 'react-router-dom';
 import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import './index.scss';
@@ -28,12 +26,13 @@ const SideMenu = (props) => {
       key: item.key,
       icon: iconList[item.key] ?? '',
       disabled: item.pagepermisson === 0,
-      onClick: ({ key }) => {
-        console.log(key, props);
-        defaultSelectedKeys = [key];
-        defaultOpenKeys = [`/${ key.split('/')[1] }`];
-        props.history.push(key);
-      },
+      ...(!isChildren && {
+        onClick: ({ key }) => {
+          defaultSelectedKeys = [key];
+          defaultOpenKeys = [`/${ key.split('/')[1] }`];
+          props.history.push(key);
+        },
+      }),
       ...(isChildren && {
         children: item.children.map(items => handleFormatMenu(items))
       })
@@ -43,7 +42,6 @@ const SideMenu = (props) => {
   // 获取菜单权限
   useEffect(() => {
     rights().then(res => {
-      console.log(res)
       const arr = res.map(item => handleFormatMenu(item)).filter(({ disabled }) => !disabled);
       setMenu(arr);
     }).catch(err => {

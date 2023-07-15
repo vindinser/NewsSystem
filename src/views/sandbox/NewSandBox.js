@@ -18,7 +18,7 @@ const NewSandBox = () => {
   } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ height: '100vh', overflow: 'hidden' }}>
       <SideMenu />
       <Layout>
         <TopHeader />
@@ -28,6 +28,7 @@ const NewSandBox = () => {
             margin: '24px 16px',
             padding: 24,
             minHeight: 280,
+            overflow: 'auto',
             background: colorBgContainer,
           }}
         >

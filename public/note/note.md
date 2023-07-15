@@ -5,6 +5,7 @@
   - [路由](#路由)
   - [引入antd](#引入antd)
   - [JsonServer](#JsonServer)
+  - [权限控制](#权限控制)
 
 
 # NewsSystem
@@ -102,12 +103,18 @@
   - 接口统一管理
   - 动态渲染侧边栏
 
-  *动态获取侧边栏后改变选中侧边栏，URL改变页面不刷新，经查阅是阉割模式的问题*
-    ```javascript
-      // index.js中的原写法
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-      // 取消严格模式
+  *动态获取侧边栏后改变选中侧边栏，URL改变页面不刷新，经查阅是严格模式的问题*
+    
+  ``` javascript
+    // index.js中的原写法
+    <React.StrictMode>
       <App />
-    ```
+    </React.StrictMode>
+    
+    // 取消严格模式
+    <App />
+  ```
+
+## 权限控制
+
+  ![权限控制](./imgs/access-control.png)
