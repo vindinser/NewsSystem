@@ -1,8 +1,8 @@
 // 权限
 import React, {useEffect, useState} from "react";
-import { Button, Table, Tag, Modal } from "antd";
+import { Button, Table, Tag, Modal, Popover, Switch } from "antd";
 import { DeleteOutlined, EditOutlined, ExclamationCircleFilled } from '@ant-design/icons';
-import { rights, delRights } from "../../../apis/urls";
+import { rights, delRights, editRights } from "../../../apis/urls";
 
 const { confirm } = Modal;
 
@@ -18,7 +18,11 @@ const RightList = () => {
       title: '操作',
       render: (item) => <div>
         <Button danger shape="circle" icon={ <DeleteOutlined /> } onClick={() => confirmMethod(item)} />
-        <Button type="primary" shape="circle" icon={ <EditOutlined /> } />
+        <Popover content={<div style={{ textAlign: 'center' }}>
+          <Switch checked={ item.pagepermisson } onChange={ () => switchMethod(item) } />
+        </div>} title="页面配置项" trigger={ item.pagepermisson ? 'click' : '' }>
+          <Button type="primary" shape="circle" icon={ <EditOutlined /> } disabled={ !item.pagepermisson } />
+        </Popover>
       </div>
     },
   ];
@@ -43,6 +47,21 @@ const RightList = () => {
         console.log('Cancel');
       },
     });
+  }
+
+  // 修改菜单是否展示开关点击事件
+  const switchMethod = (item) => {
+    item.pagepermisson = item.pagepermisson === 1 ? 0 : 1;
+    setDataSource([...dataSource]);
+    editRights({
+      apiName: item.grade === 1 ? 'rights' : 'children',
+      id: item.id,
+      data: {
+        pagepermisson: item.pagepermisson
+      }
+    }).catch(err => {
+      console.error(err)
+    })
   }
 
   // 获取列表数据
