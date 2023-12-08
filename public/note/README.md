@@ -125,3 +125,13 @@
 
 ### 用户列表
   > 升级 `antd` 至最新版本 `5.12.1`
+  
+  * 表格中筛选为 英文按钮 ，全局将 `antd` 英文转换为中文*
+  ``` jsx
+    import zhCN from 'antd/es/locale/zh_CN';
+    import { ConfigProvider } from 'antd';
+    
+    <ConfigProvider locale={zhCN}>
+      <App />
+    </ConfigProvider>
+  ```
