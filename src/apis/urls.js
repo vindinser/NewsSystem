@@ -17,11 +17,31 @@ const delRoles = id => request(`roles/${ id }`, 'delete');
 // 角色列表-修改角色权限
 const editRole = ({ apiName, id, data }) => request(`roles/${ id }`, 'patch', data)
 
+// 获取用户列表
+const getUsers = () => request(`users?_expand=role`)
+// 新增用户
+const addUser = data => request(`users`, "post", data)
+// 删除用户
+const delUser = id => request(`users/${ id }`, "delete")
+// 需改用户状态
+const editUserStatus = (id, data) => request(`users/${ id }`, 'patch', data)
+// 修改用户信息
+const editUser = data => request(`users/${ data.id }`, "patch", data)
+
+// 获取区域
+const getRegions = () => request(`regions`)
+
 export {
   rights,
   delRights,
   editRights,
   roles,
   delRoles,
-  editRole
+  editRole,
+  getUsers,
+  getRegions,
+  addUser,
+  delUser,
+  editUserStatus,
+  editUser
 }

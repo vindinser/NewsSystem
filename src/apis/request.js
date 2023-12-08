@@ -10,7 +10,14 @@ const request = (url, method = 'get', data = {}) => {
       url: `${ baseUrl }${ url }`,
       data
     }).then(res => {
-      if(res.status !== 200) return reject('Network Error！');
+      /**
+       * 1xx：信息性状态码，表示请求已被接受，继续处理。
+       * 2xx：成功状态码，表示请求已成功被服务器接收、理解和处理。
+       * 3xx：重定向状态码，表示需要进一步操作以完成请求。
+       * 4xx：客户端错误状态码，表示客户端发送的请求有误。
+       * 5xx：服务器错误状态码，表示服务器在处理请求时发生了错误。
+       */
+      if(res.status < 200 || res.status > 300) return reject('Network Error！');
       resolve(res.data);
     }).catch(err => reject('Network Error！'));
   })
