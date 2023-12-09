@@ -21,6 +21,11 @@ const UserList = () => {
 
   const addFormRef = useRef(null);
 
+  const {
+    roleId,
+    region: roleRegion,
+    username: userName
+  } = JSON.parse(localStorage.getItem("token"));
 
   // 列表列
   const columns = [
@@ -50,18 +55,22 @@ const UserList = () => {
 
   // 获取列表数据
   const getTableData = () => {
+    console.log(roleId, roleRegion);
     getUsers().then(res =>
-      setDataSource(res)
+      setDataSource(() => res.reduce((pre, cur) => [
+        ...pre,
+        ...((roleId === 1 || cur.username  === userName || (([3, 2, 1][roleId-1] > cur.roleId) && (cur.region === roleRegion))) ? [cur] : [])
+      ], []))
     ).catch(err => {
       console.error(err);
       setDataSource([])
     });
   };
 
+  // 获取权限列表数据
   useEffect(() => {
-    // 获取权限列表数据
     getTableData();
-  }, []);
+  }, [roleId, roleRegion, userName]);
 
   // 获取区域
   useEffect(() => {
@@ -149,7 +158,7 @@ const UserList = () => {
         onCancel={() => modelClose()}
         onOk={() => addFormConfirm()}
       >
-        <UserForm ref={addFormRef} regionList={regionList} isEditDisable={isEditDisable && isEdit} />
+        <UserForm ref={addFormRef} regionList={regionList} isEditDisable={isEditDisable && isEdit} isEdit={isEdit} />
       </Modal>
       <Button type="primary" onClick={() => setIsAddOpen(true)}>添加用户</Button>
       <Table dataSource={dataSource} columns={columns} pagination={{ pageSize: 5 }} rowKey={item => item.id} />

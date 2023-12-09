@@ -31,6 +31,9 @@ const editUser = data => request(`users/${ data.id }`, "patch", data)
 // 获取区域
 const getRegions = () => request(`regions`)
 
+// 登录
+const login = ({ username, password }) => request(`users?username=${ username }&password=${ password }&roleStatus=true&_expand=role`)
+
 export {
   rights,
   delRights,
@@ -43,5 +46,6 @@ export {
   addUser,
   delUser,
   editUserStatus,
-  editUser
+  editUser,
+  login
 }

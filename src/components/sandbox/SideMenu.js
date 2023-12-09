@@ -20,30 +20,42 @@ const SideMenu = (props) => {
   let defaultSelectedKeys = [props.location.pathname];
   let defaultOpenKeys = [`/${ props.location.pathname.split('/')[1] }`];
 
-  const handleFormatMenu = (item) => {
-    return (isChildren => ({
-      label: item.title,
-      key: item.key,
-      icon: iconList[item.key] ?? '',
-      disabled: item.pagepermisson === 0,
-      ...(!isChildren && {
-        onClick: ({ key }) => {
-          defaultSelectedKeys = [key];
-          defaultOpenKeys = [`/${ key.split('/')[1] }`];
-          props.history.push(key);
-        },
-      }),
-      ...(isChildren && {
-        children: item.children.map(items => handleFormatMenu(items))
-      })
-    }))(item.children && item.children.length > 0);
+  const { role: { rights: roleRights } } = JSON.parse(localStorage.getItem("token"));
+
+  /**
+   * 递归 处理 菜单
+   * @param arr 接收需要处理的菜单项
+   * @returns {Array} 返回处理好格式的数组
+   */
+  const handleFormatMenu = (arr) => {
+    return arr.reduce((pre, cur) => {
+      if(roleRights.includes(cur.key) && cur.pagepermisson !== 0) {
+        const isChildren = cur.children && cur.children.length > 0;
+        pre.push({
+          label: cur.title,
+          key: cur.key,
+          icon: iconList[cur.key] ?? '',
+          disabled: cur.pagepermisson === 0,
+          ...(!isChildren && {
+            onClick: ({ key }) => {
+              defaultSelectedKeys = [key];
+              defaultOpenKeys = [`/${ key.split('/')[1] }`];
+              props.history.push(key);
+            },
+          }),
+          ...(isChildren && {
+            children: handleFormatMenu(cur.children)
+          })
+        });
+      }
+      return pre;
+    }, []);
   }
 
   // 获取菜单权限
   useEffect(() => {
     rights().then(res => {
-      const arr = res.map(item => handleFormatMenu(item)).filter(({ disabled }) => !disabled);
-      setMenu(arr);
+      setMenu(() => handleFormatMenu(res));
     }).catch(err => {
       console.error(err);
       setMenu([]);

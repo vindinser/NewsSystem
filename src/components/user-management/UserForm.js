@@ -15,15 +15,31 @@ const UserForm = forwardRef((props, ref) => {
 
   // 用户列表
   const [roleList, setRoleList] = useState([]);
+  // 区域列表
+  const [regionList, setRegionList] = useState([]);
   // 是否禁用
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const { roleId: userRolesId, region: roleRegion } = JSON.parse(localStorage.getItem("token"));
 
   // 获取角色
   useEffect(() => {
     getRoles().then(role =>
-      setRoleList(role.map(({ id: roleId, roleName }) => ({ roleId, roleName })))
+      setRoleList(role.map(({ id: roleId, roleName }) => ({
+        roleId,
+        roleName,
+        disabled: userRolesId === 1 ? false : [3, 2, 1][userRolesId-1] > roleId
+      })))
     );
-  }, []);
+  }, [props.isEdit]);
+
+  // 获取大区
+  useEffect(() => {
+    setRegionList(() => props.regionList.map(item => ({
+      ...item,
+      disabled: userRolesId === 1 ? false : props.isEdit ? (userRolesId !== 1) : (item.region !== roleRegion)
+    })));
+  }, [props.isEdit]);
 
   // 编辑时若角色为超级管理员则 区域禁用
   useEffect(() => {
@@ -61,7 +77,7 @@ const UserForm = forwardRef((props, ref) => {
       >
         <Select
           fieldNames={{ label: "title", value: "region" }}
-          options={props.regionList}
+          options={regionList}
           disabled={isDisabled}
         />
       </Form.Item>

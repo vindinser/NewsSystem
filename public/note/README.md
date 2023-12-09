@@ -135,3 +135,27 @@
       <App />
     </ConfigProvider>
   ```
+
+### 登录
+
+  - 使用 `react-particles-js` 实现粒子效果
+    > `react-particles-js` 已停止维护，推荐使用 [`@tsparticles/react`](https://www.npmjs.com/package/@tsparticles/react)
+    ``` powershell
+      # 安装@tsparticles/react
+      npm i @tsparticles/react
+      
+      # 安装@tsparticles/slim
+      npm i @tsparticles/slim
+    ```
+  - 路由拦截 无 `token` 不能登录
+    ```jsx
+      {/* 重定向 */}
+      <Route path="/" render={() => localStorage.getItem("token")
+        ? <NewSandBox />
+        : <Redirect to="/login"/>
+      } />
+    ```
+  - 增加角色权限
+    - 根据不同角色权限 展示不同的菜单
+    - 根据不同角色权限 新增 用户权限 < 当前登录用户角色权限
+  - 
