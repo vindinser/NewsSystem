@@ -162,3 +162,11 @@
 ### 路由权限
   - 动态路由（通过接口获取菜单，渲染）
   - 根据菜单开关状态、用户权限控制路由跳转
+  - 安装 `nprogress` 实现加载条
+    ``` powershell
+      # 安装 nprogress
+      npm install --save nprogress
+      
+      # 国外源下载较慢，不想使用 镜像，可通过配置npm代理解决
+      npm config set proxy socks5://127.0.0.1:7890
+    ``` 
