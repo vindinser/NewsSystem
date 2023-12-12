@@ -34,6 +34,9 @@ const getRegions = () => request(`regions`)
 // 登录
 const login = ({ username, password }) => request(`users?username=${ username }&password=${ password }&roleStatus=true&_expand=role`)
 
+// 获取菜单（平铺路由）
+const menuList = () => Promise.all([request(`rights`), request(`children`)]);
+
 export {
   rights,
   delRights,
@@ -47,5 +50,6 @@ export {
   delUser,
   editUserStatus,
   editUser,
-  login
+  login,
+  menuList
 }
