@@ -37,6 +37,11 @@ const login = ({ username, password }) => request(`users?username=${ username }&
 // 获取菜单（平铺路由）
 const menuList = () => Promise.all([request(`rights`), request(`children`)]);
 
+// 获取新闻分类
+const getCategories = () => request(`categories`);
+// 新增新闻（保存草稿箱/提交审核）
+const addNews = data => request(`news`, "post", data);
+
 export {
   rights,
   delRights,
@@ -51,5 +56,7 @@ export {
   editUserStatus,
   editUser,
   login,
-  menuList
+  menuList,
+  getCategories,
+  addNews
 }

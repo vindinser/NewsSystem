@@ -170,3 +170,19 @@
       # 国外源下载较慢，不想使用 镜像，可通过配置npm代理解决
       npm config set proxy socks5://127.0.0.1:7890
     ``` 
+
+### 新闻业务
+
+#### 新闻撰写
+
+  - `PageHeader` 组件在 `antd 5` 已被废除 若要使用需安装 `@ant-design/pro-layout`
+    ``` powershell
+      # 安装@ant-design/pro-layout
+      npm install --save @ant-design/pro-layout
+    ```
+  - [引入富文本编辑器进行撰写新闻](https://github.com/jpuri/react-draft-wysiwyg)
+    ``` powershell
+      # 安装 react-draft-wysiwyg draft-js
+      npm install --save react-draft-wysiwyg draft-js
+    ```
+  - 封装富文本编辑组件

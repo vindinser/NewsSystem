@@ -584,6 +584,36 @@
       "view": 6,
       "id": 9,
       "publishTime": 1616203519274
+    },
+    {
+      "title": "测试保存草稿箱",
+      "categoryId": 1,
+      "auditState": 0,
+      "content": "<p>测试保存草稿箱</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": 1,
+      "publishState": 0,
+      "createTime": 1702890380716,
+      "star": 0,
+      "view": 0,
+      "publishTime": 0,
+      "id": 10
+    },
+    {
+      "title": "测试提交审核",
+      "categoryId": 6,
+      "auditState": 1,
+      "content": "<p>测试提交审核</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": 1,
+      "publishState": 0,
+      "createTime": 1702890409695,
+      "star": 0,
+      "view": 0,
+      "publishTime": 0,
+      "id": 11
     }
   ]
 }
