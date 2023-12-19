@@ -6,7 +6,14 @@
   - [引入antd](#引入antd)
   - [JsonServer](#JsonServer)
   - [权限控制](#权限控制)
-
+    - [权限列表](#权限列表)
+    - [角色列表](#角色列表)
+    - [用户列表](#用户列表)
+    - [登录](#登录)
+    - [路由权限](#路由权限)
+  - [新闻业务](#新闻业务)
+    - [新闻撰写](#新闻撰写)
+    - [草稿箱列表](#草稿箱列表)
 
 # NewsSystem
 
@@ -171,9 +178,9 @@
       npm config set proxy socks5://127.0.0.1:7890
     ``` 
 
-### 新闻业务
+## 新闻业务
 
-#### 新闻撰写
+### 新闻撰写
 
   - `PageHeader` 组件在 `antd 5` 已被废除 若要使用需安装 `@ant-design/pro-layout`
     ``` powershell
@@ -186,3 +193,26 @@
       npm install --save react-draft-wysiwyg draft-js
     ```
   - 封装富文本编辑组件
+
+### 草稿箱列表
+  - 删除功能
+  - 预览功能
+    - 创建预览路由 `/news-manage/preview/:id`
+    - 存储时间戳，转换时间格式使用 `moment.js`
+      ``` powershell
+        # 安装 moment
+        npm i --save moment
+      ```
+    - 实现预览富文本(dangerouslySetInnerHTML)
+      ``` jsx
+        <div dangerouslySetInnerHTML={{ __html: newsInfo?.content ?? "--" }} ></div>
+      ```
+  -  更新（修改）新闻信息功能
+    - 可复用新增（撰写）新闻组件
+    - 回显新闻信息
+      - 回显富文本需要将 `html` 转换回 `draft` 对象，需要使用 `html-to-draftjs`
+        ``` powershell
+          # 安装 html-to-draftjs
+          npm i --save html-to-draftjs 
+        ```
+  - 提交审核功能

@@ -16,6 +16,8 @@ import NoPermission from "../../views/sandbox/nopermission/NoPermission";
 import NewsAdd from "../../views/sandbox/news-mange/NewsAdd";
 import NewsDraft from "../../views/sandbox/news-mange/NewsDraft";
 import NewsCategory from "../../views/sandbox/news-mange/NewsCategory";
+import NewsPreview from "../../views/sandbox/news-mange/NewsPreview";
+import NewsUpdate from "../../views/sandbox/news-mange/NewsUpdate";
 import Audit from "../../views/sandbox/audit-manage/Audit";
 import AuditList from "../../views/sandbox/audit-manage/AuditList";
 import Unpublished from "../../views/sandbox/pubilsh-manage/Unpublished";
@@ -31,6 +33,8 @@ const LocalRouter = {
   "/news-manage/add": NewsAdd,
   "/news-manage/draft": NewsDraft,
   "/news-manage/category": NewsCategory,
+  "/news-manage/preview/:id": NewsPreview,
+  "/news-manage/update/:id": NewsUpdate,
   "/audit-manage/audit": Audit,
   "/audit-manage/list": AuditList,
   "/publish-manage/unpublished": Unpublished,
@@ -57,7 +61,7 @@ const NewsRouter = () => {
    * @param pagepermisson
    * @returns {Boolean}
    */
-  const checkRouter = (key, pagepermisson) => LocalRouter[key] && pagepermisson
+  const checkRouter = (key, pagepermisson, routepermisson) => LocalRouter[key] && (pagepermisson || routepermisson)
 
   const { role: { rights: userRights } } = JSON.parse(localStorage.getItem("token"));
   /**
@@ -70,8 +74,8 @@ const NewsRouter = () => {
   return (
     <Switch>
       {
-        routerList.map(({ key, pagepermisson }) => (
-          (checkRouter(key, pagepermisson) && checkUserPremission(key)) && <Route path={key} component={LocalRouter[key]} key={key} exact />
+        routerList.map(({ key, pagepermisson, routepermisson }) => (
+          (checkRouter(key, pagepermisson, routepermisson) && checkUserPremission(key)) && <Route path={key} component={LocalRouter[key]} key={key} exact />
         ))
       }
 

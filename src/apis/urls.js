@@ -42,6 +42,15 @@ const getCategories = () => request(`categories`);
 // 新增新闻（保存草稿箱/提交审核）
 const addNews = data => request(`news`, "post", data);
 
+// 草稿箱列表
+const getDraftList = ({ author, auditState }) => request(`news?author=${ author }&auditState=${ auditState }&_expand=category`);
+// 删除草稿
+const delDraft = id => request(`news/${ id }`, "delete")
+// 获取新闻详情
+const getNewsDetail = id => request(`news/${ id }?_expand=category&_expand=role`)
+// 更新（修改）新闻
+const updateNews = data => request(`news/${ data.id }`, "patch", data)
+
 export {
   rights,
   delRights,
@@ -58,5 +67,9 @@ export {
   login,
   menuList,
   getCategories,
-  addNews
+  addNews,
+  getDraftList,
+  delDraft,
+  getNewsDetail,
+  updateNews
 }
