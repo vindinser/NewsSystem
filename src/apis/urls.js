@@ -54,6 +54,9 @@ const updateNews = data => request(`news/${ data.id }`, "patch", data)
 // 获取审核列表
 const getAuditList = userName => request(`news?author=${ userName }&auditState_ne=0&publishState_lte=1&_expand=category`)
 
+// 获取发布新闻列表
+const getPublishList = userName => request(`news?auditState=1&_expand=category`)
+
 export {
   rights,
   delRights,
@@ -75,5 +78,6 @@ export {
   delDraft,
   getNewsDetail,
   updateNews,
-  getAuditList
+  getAuditList,
+  getPublishList
 }

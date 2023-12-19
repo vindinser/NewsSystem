@@ -46,7 +46,7 @@ const AuditList = (props) => {
           }>发布</Button>
         }
         {
-          item.auditState === 2 && <Button type="primary" onClick={() =>
+          item.auditState === 3 && <Button type="primary" onClick={() =>
             props.history.push(`/news-manage/update/${ item.id }`)
           }>编辑</Button>
         }
