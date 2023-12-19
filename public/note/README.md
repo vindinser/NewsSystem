@@ -14,6 +14,7 @@
   - [新闻业务](#新闻业务)
     - [新闻撰写](#新闻撰写)
     - [草稿箱列表](#草稿箱列表)
+    - [审核列表](#审核列表)
 
 # NewsSystem
 
@@ -215,4 +216,25 @@
           # 安装 html-to-draftjs
           npm i --save html-to-draftjs 
         ```
+        ``` js
+          // 回显富文本
+          useEffect(() => {
+            if(!props.content) return;
+            const contentBlock = htmlToDraft(props.content);
+            if (contentBlock) {
+              const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+              const editorState = EditorState.createWithContent(contentState);
+              setEditorState(editorState)
+            }
+          }, [props.content]);
+        ```
   - 提交审核功能
+
+
+### 审核管理
+
+  - 审核列表
+    - 列表
+    - 撤销功能
+    - 编辑功能（复用）
+    - 发布功能

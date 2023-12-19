@@ -39,7 +39,14 @@ const NewsPreview = (props) => {
           </Descriptions.Item>
           <Descriptions.Item label="区域">{newsInfo?.region ?? '--'}</Descriptions.Item>
           <Descriptions.Item label="审核状态">
-            <div style={{ color: "red", fontWeight: "bold" }}>
+            <div style={{
+              color: newsInfo?.auditState === 0 ? "black"
+                : newsInfo?.auditState === 1 ? "orange"
+                  : newsInfo?.auditState === 2 ? "green"
+                    :newsInfo?.auditState === 3 ? "red"
+                      : "--",
+              fontWeight: "bold" }}
+            >
               {
                 newsInfo?.auditState === 0 ? "未审核"
                   : newsInfo?.auditState === 1 ? "审核中"
@@ -50,7 +57,14 @@ const NewsPreview = (props) => {
             </div>
           </Descriptions.Item>
           <Descriptions.Item label="发布状态">
-            <div style={{color: "red", fontWeight: "bold"}}>
+            <div
+              style={{color: newsInfo?.publishState === 0 ? "black"
+                : newsInfo?.publishState === 1 ? "orange"
+                  : newsInfo?.publishState === 2 ? "green"
+                    : newsInfo?.publishState === 3 ? "red"
+                      : "--",
+                fontWeight: "bold"}}
+            >
               {
                 newsInfo?.publishState === 0 ? "未发布"
                   : newsInfo?.publishState === 1 ? "待发布"
