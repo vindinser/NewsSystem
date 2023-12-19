@@ -47,10 +47,9 @@ const NewsRouter = () => {
 
   // 获取路由
   useEffect(() => {
-    menuList().then(res => {
-      console.log([...res[0], ...res[1]]);
-      setRouterList([...res[0], ...res[1]]);
-    }).catch(err => {
+    menuList().then(res =>
+      setRouterList([...res[0], ...res[1]])
+    ).catch(err => {
       console.error(err);
     })
   }, []);

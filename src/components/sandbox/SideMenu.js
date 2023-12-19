@@ -29,7 +29,7 @@ const SideMenu = (props) => {
    */
   const handleFormatMenu = (arr) => {
     return arr.reduce((pre, cur) => {
-      if(roleRights.includes(cur.key) && cur.pagepermisson !== 0) {
+      if(roleRights.includes(cur.key) && cur.pagepermisson === 1) {
         const isChildren = cur.children && cur.children.length > 0;
         pre.push({
           label: cur.title,
@@ -54,9 +54,9 @@ const SideMenu = (props) => {
 
   // 获取菜单权限
   useEffect(() => {
-    rights().then(res => {
-      setMenu(() => handleFormatMenu(res));
-    }).catch(err => {
+    rights().then(res =>
+      setMenu(() => handleFormatMenu(res))
+    ).catch(err => {
       console.error(err);
       setMenu([]);
     });
