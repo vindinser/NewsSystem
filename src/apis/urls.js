@@ -57,6 +57,15 @@ const getAuditList = userName => request(`news?author=${ userName }&auditState_n
 // 获取发布新闻列表
 const getPublishList = userName => request(`news?auditState=1&_expand=category`)
 
+// 修改新闻分类
+const updateCategories = data => request(`categories/${ data.id }`, "patch", data);
+
+// 删除新闻分类
+const delCategory = id => request(`categories/${ id }`, "delete");
+
+// 新增新闻分类
+const addNewsCategory = data => request(`categories`, "post", data);
+
 export {
   rights,
   delRights,
@@ -79,5 +88,8 @@ export {
   getNewsDetail,
   updateNews,
   getAuditList,
-  getPublishList
+  getPublishList,
+  updateCategories,
+  delCategory,
+  addNewsCategory
 }
