@@ -254,3 +254,19 @@
   - 自定义Hooks
     > 将列表封装后，获取列表数据方法冗余，将其自定义Hooks
     - 在自定义hooks中实现发布、下线、删除操作
+
+## 状态管理
+  - 安装依赖
+    ``` powershell
+      # 安装 redux、react-redux
+      npm i --save redux react-redux
+    ```
+    - 创建 `store`
+      ``` js
+        // import {createStore} from "redux";
+        // createStore 已过时，替换为legacy_createStore
+        import {legacy_createStore as createStore} from "redux";
+      
+        const store = createStore(() => {});
+      ```
+    - 实现侧边栏的折叠与展开

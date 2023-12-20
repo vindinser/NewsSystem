@@ -1,5 +1,5 @@
 // 导航栏
-import React, {useState} from "react";
+import React from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -7,10 +7,10 @@ import {
 } from '@ant-design/icons';
 import { Layout, theme, Button, Dropdown, Avatar  } from 'antd';
 import { withRouter } from 'react-router-dom';
+import {connect} from "react-redux";
 const { Header } = Layout;
 
 const TopHeader = (props) => {
-  const [collapsed, setCollapsed] = useState(false);
 
   const {
     token: { colorBgContainer },
@@ -46,8 +46,8 @@ const TopHeader = (props) => {
     >
       <Button
         type="text"
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
+        icon={props.isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        onClick={() => props.changeCollapsed()}
         style={{
           fontSize: '16px',
           width: 64,
@@ -64,4 +64,22 @@ const TopHeader = (props) => {
   )
 }
 
-export default withRouter(TopHeader)
+/*
+   connect(
+      // mapStateToProps
+      // mapDisPatchToProps
+   )
+*/
+
+const mapStateToProps = ({ CollapsedReducer: { isCollapsed } }) => ({
+  isCollapsed
+})
+
+const mapDisPatchToProps = {
+  changeCollapsed: () => ({
+    type: "change_collapsed"
+    // payload:
+  })
+}
+
+export default connect(mapStateToProps, mapDisPatchToProps)(withRouter(TopHeader))

@@ -7,6 +7,7 @@ import {
 import { Layout, Menu } from 'antd';
 import './index.scss';
 import { rights } from '../../apis/urls';
+import {connect} from "react-redux";
 
 const { Sider } = Layout;
 
@@ -15,7 +16,6 @@ const iconList = {
 }
 
 const SideMenu = (props) => {
-  const [collapsed, setCollapsed] = useState(false);
   const [menu, setMenu] = useState([]);
   let defaultSelectedKeys = [props.location.pathname];
   let defaultOpenKeys = [`/${ props.location.pathname.split('/')[1] }`];
@@ -63,7 +63,7 @@ const SideMenu = (props) => {
   }, []);
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Sider trigger={null} collapsible collapsed={props.isCollapsed}>
       <div className="sider-box">
         <div className="sider-box_logo">
           全球新闻发布管理系统
@@ -82,4 +82,6 @@ const SideMenu = (props) => {
   )
 }
 
-export default withRouter(SideMenu)
+export default connect(({ CollapsedReducer: { isCollapsed } }) => ({
+  isCollapsed
+}))(withRouter(SideMenu))
