@@ -74,6 +74,14 @@ const addNewsCategory = data => request(`categories`, "post", data);
  */
 const queryPublishList = ({ userName, publishState }) => request(`news?author=${ userName }&publishState=${ publishState }&_expand=category`);
 
+// 首页-用户最常浏览、用户点赞最多，新闻分类图示
+const getHomeData = () => Promise.all([
+  request(`news?publishState=2&_expand=category&_sort=view&_order=desc&_limit=6`),
+  request(`news?publishState=2&_expand=category&_sort=star&_order=desc&_limit=6`),
+  request("news?publishState=2&_expand=category")
+]);
+
+
 export {
   rights,
   delRights,
@@ -100,5 +108,6 @@ export {
   updateCategories,
   delCategory,
   addNewsCategory,
-  queryPublishList
+  queryPublishList,
+  getHomeData
 }
