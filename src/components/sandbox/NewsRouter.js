@@ -24,6 +24,8 @@ import Unpublished from "../../views/sandbox/publish-manage/Unpublished";
 import Published from "../../views/sandbox/publish-manage/Published";
 import Sunset from "../../views/sandbox/publish-manage/Sunset";
 import {menuList} from "../../apis/urls";
+import {Spin} from "antd";
+import {connect} from "react-redux";
 
 const LocalRouter = {
   "/home": Home,
@@ -42,7 +44,7 @@ const LocalRouter = {
   "/publish-manage/sunset": Sunset
 }
 
-const NewsRouter = () => {
+const NewsRouter = (props) => {
   const [routerList, setRouterList] = useState([]);
 
   // 获取路由
@@ -71,20 +73,24 @@ const NewsRouter = () => {
   const checkUserPremission = (key) => userRights.includes(key)
 
   return (
-    <Switch>
-      {
-        routerList.map(({ key, pagepermisson, routepermisson }) => (
-          (checkRouter(key, pagepermisson, routepermisson) && checkUserPremission(key)) && <Route path={key} component={LocalRouter[key]} key={key} exact />
-        ))
-      }
+    <Spin size="large" spinning={props.isLoading}>
+      <Switch>
+        {
+          routerList.map(({ key, pagepermisson, routepermisson }) => (
+            (checkRouter(key, pagepermisson, routepermisson) && checkUserPremission(key)) && <Route path={key} component={LocalRouter[key]} key={key} exact />
+          ))
+        }
 
-      {/* 重定向 */}
-      <Redirect from="/" to="/home" exact />
-      {
-        routerList.length > 0 && <Route path="*" component={NoPermission} />
-      }
-    </Switch>
+        {/* 重定向 */}
+        <Redirect from="/" to="/home" exact />
+        {
+          routerList.length > 0 && <Route path="*" component={NoPermission} />
+        }
+      </Switch>
+    </Spin>
   )
 }
 
-export default NewsRouter;
+export default connect(({ LoadingReducer: { isLoading } }) => ({
+  isLoading
+}))(NewsRouter);
