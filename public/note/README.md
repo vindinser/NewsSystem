@@ -261,38 +261,38 @@
       # 安装 redux、react-redux
       npm i --save redux react-redux
     ```
-    - 创建 `store`
-      ``` js
-        // import {createStore} from "redux";
-        // createStore 已过时，替换为legacy_createStore
-        import {legacy_createStore as createStore} from "redux";
+  - 创建 `store`
+    ``` js
+      // import {createStore} from "redux";
+      // createStore 已过时，替换为legacy_createStore
+      import {legacy_createStore as createStore} from "redux";
       
-        const store = createStore(() => {});
-      ```
-    - 实现侧边栏的折叠与展开
-      - 实现loading的加载
-      > 使用 `antd` 的加载组件 `<Spin size="large" />`，在发送请求前加载请求后取消加载
-        - 直接再 `src/apis/request.js` 文件中请求之前 显示 loading 请求结束之后（finally） 隐藏 loading
-          - 通过 `axios` 拦截器（interceptors）
-            ```js
-              // Add a request interceptor
-              axios.interceptors.request.use(function (config) {
-                // Do something before request is sent
-                return config;
-              }, function (error) {
-                // Do something with request error
-                return Promise.reject(error);
-              });
+      const store = createStore(() => {});
+    ```
+  - 实现侧边栏的折叠与展开
+  - 实现loading的加载
+    > 使用 `antd` 的加载组件 `<Spin size="large" />`，在发送请求前加载请求后取消加载
+    - 直接再 `src/apis/request.js` 文件中请求之前 显示 loading 请求结束之后（finally） 隐藏 loading
+    - 通过 `axios` 拦截器（interceptors）
+      ```js
+        // Add a request interceptor
+        axios.interceptors.request.use(function (config) {
+          // Do something before request is sent
+          return config;
+        }, function (error) {
+          // Do something with request error
+          return Promise.reject(error);
+        });
 
-              // Add a response interceptor
-              axios.interceptors.response.use(function (response) {
-                // Any status code that lie within the range of 2xx cause this function to trigger
-                // Do something with response data
-                return response;
-              }, function (error) {
-                 // Any status codes that falls outside the range of 2xx cause this function to trigger
-                 // Do something with response error
-                 return Promise.reject(error);
-              });
-            ```
-        -
+        // Add a response interceptor
+        axios.interceptors.response.use(function (response) {
+          // Any status code that lie within the range of 2xx cause this function to trigger
+          // Do something with response data
+          return response;
+        }, function (error) {
+           // Any status codes that falls outside the range of 2xx cause this function to trigger
+           // Do something with response error
+           return Promise.reject(error);
+        });
+      ```
+  - 数据持久化，使用 `Redux Persist` 进行数据持久化

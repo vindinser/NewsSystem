@@ -1,6 +1,6 @@
 // 封装axios请求方法
 import axios from 'axios';
-import store from "../redux/store";
+import { store } from "../redux/store";
 
 const baseUrl = 'http://localhost:5000/';
 

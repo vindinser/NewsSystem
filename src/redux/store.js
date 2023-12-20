@@ -9,12 +9,26 @@
 import {combineReducers, legacy_createStore as createStore} from "redux";
 import {CollapsedReducer} from "./reducers/CollapsedReducer";
 import {LoadingReducer} from "./reducers/LoadingReducer";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+
+const persistConfig = {
+  key: 'redux',
+  storage,
+  blacklist: ['LoadingReducer']
+}
 
 const reducer = combineReducers({
   CollapsedReducer,
   LoadingReducer
 });
 
-const store = createStore(reducer);
+const persistedReducer = persistReducer(persistConfig, reducer)
 
-export default store;
+const store = createStore(persistedReducer);
+const persistedStore = persistStore(store);
+
+export {
+  store,
+  persistedStore
+};
