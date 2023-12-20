@@ -66,6 +66,14 @@ const delCategory = id => request(`categories/${ id }`, "delete");
 // 新增新闻分类
 const addNewsCategory = data => request(`categories`, "post", data);
 
+/**
+ * 获取 待/已 发布、已下线新闻列表
+ * @param userName
+ * @param publishState 1：待发布 2：已发布 3：已下线
+ * @returns {Promise | Promise<unknown>}
+ */
+const queryPublishList = ({ userName, publishState }) => request(`news?author=${ userName }&publishState=${ publishState }&_expand=category`);
+
 export {
   rights,
   delRights,
@@ -91,5 +99,6 @@ export {
   getPublishList,
   updateCategories,
   delCategory,
-  addNewsCategory
+  addNewsCategory,
+  queryPublishList
 }

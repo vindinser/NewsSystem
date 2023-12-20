@@ -20,9 +20,9 @@ import NewsPreview from "../../views/sandbox/news-mange/NewsPreview";
 import NewsUpdate from "../../views/sandbox/news-mange/NewsUpdate";
 import Audit from "../../views/sandbox/audit-manage/Audit";
 import AuditList from "../../views/sandbox/audit-manage/AuditList";
-import Unpublished from "../../views/sandbox/pubilsh-manage/Unpublished";
-import Published from "../../views/sandbox/pubilsh-manage/Published";
-import Sunset from "../../views/sandbox/pubilsh-manage/Sunset";
+import Unpublished from "../../views/sandbox/publish-manage/Unpublished";
+import Published from "../../views/sandbox/publish-manage/Published";
+import Sunset from "../../views/sandbox/publish-manage/Sunset";
 import {menuList} from "../../apis/urls";
 
 const LocalRouter = {

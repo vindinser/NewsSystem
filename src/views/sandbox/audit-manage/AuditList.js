@@ -41,7 +41,8 @@ const AuditList = (props) => {
           item.auditState === 2 && <Button type="dashed" danger onClick={() =>
             handleBtnclick({
               id: item.id,
-              publishState: 2
+              publishState: 2,
+              publishTime: Date.now()
             })
           }>发布</Button>
         }
