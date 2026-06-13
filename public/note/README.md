@@ -49,7 +49,7 @@
 ## 路由
 
   ![路由架构](./imgs/route-architecture.png)
-  
+
   ### 搭建路由
 
   ``` javascript
@@ -64,7 +64,7 @@
   `antd` 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。
 
 ### 安装antd
-  
+
   ``` powershell
     npm install antd --save
   ```
@@ -138,7 +138,7 @@
 
 ### 用户列表
   > 升级 `antd` 至最新版本 `5.12.1`
-  
+
   * 表格中筛选为 英文按钮 ，全局将 `antd` 英文转换为中文*
   ``` jsx
     import zhCN from 'antd/es/locale/zh_CN';
@@ -173,6 +173,7 @@
     - 根据不同角色权限 新增 用户权限 < 当前登录用户角色权限
 
 ### 路由权限
+
   - 动态路由（通过接口获取菜单，渲染）
   - 根据菜单开关状态、用户权限控制路由跳转
   - 安装 `nprogress` 实现加载条
@@ -182,7 +183,7 @@
       
       # 国外源下载较慢，不想使用 镜像，可通过配置npm代理解决
       npm config set proxy socks5://127.0.0.1:7890
-    ``` 
+    ```
 
 ## 新闻业务
 
@@ -285,7 +286,7 @@
           // Do something with request error
           return Promise.reject(error);
         });
-
+      
         // Add a response interceptor
         axios.interceptors.response.use(function (response) {
           // Any status code that lie within the range of 2xx cause this function to trigger

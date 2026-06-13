@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# 全球新闻发布管理系统
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+基于 React 18 + Ant Design 5 + Redux 的新闻管理后台，支持多角色权限控制、新闻发布审核流程。
 
-## Available Scripts
+## 技术栈
 
-In the project directory, you can run:
+- React 18 + CRA
+- Ant Design 5
+- Redux + redux-persist
+- react-router-dom v5 (HashRouter)
+- json-server (mock 后端)
+- react-draft-wysiwyg (富文本编辑器)
+- SCSS
 
-### `npm start`
+## 快速开始
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+需要同时启动后端和前端：
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+# 终端 1：启动 json-server 后端
+npx json-server --watch db/db.json --port 5000
 
-### `npm test`
+# 终端 2：启动前端开发服务器
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 前端：http://localhost:3000
+- 后端 API：http://localhost:5000
 
-### `npm run build`
+## 测试账号
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| 角色 | 用户名 | 密码 |
+|------|--------|------|
+| 超级管理员 | admin | 123456 |
+| 区域管理员 | 铁锤 | 123 |
+| 区域编辑 | 西门吹灯 | 123 |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 功能模块
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 用户管理：增删改查，角色分配
+- 权限管理：菜单权限、角色权限配置
+- 新闻管理：撰写、草稿箱、分类管理
+- 审核管理：新闻审核流程
+- 发布管理：待发布、已发布、已下线
+- 首页：数据统计、图表展示
 
-### `npm run eject`
+## 项目结构
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+├── apis/              # API 接口定义
+├── components/        # 公共组件
+├── redux/             # 状态管理
+├── route/             # 路由配置
+└── views/             # 页面组件
+    ├── login/         # 登录
+    ├── news/          # 游客新闻页
+    └── sandbox/       # 后台管理页面
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 说明
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 数据库文件：`db/db.json`，可直接编辑修改数据
+- 权限控制：基于 `roles.rights` 数组匹配路由 key
+- 新闻内容：富文本 HTML 存储
